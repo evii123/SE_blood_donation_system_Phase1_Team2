@@ -10,7 +10,7 @@ The platform connects three actor types:
 ## Team Information
 
 ### Team Name
-- `<Team Name>`
+- `Team2`
 
 ### Team Leader
 - **`Evi Shedula`** (`@evii123`) - **Team Leader**
