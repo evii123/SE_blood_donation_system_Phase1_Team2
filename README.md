@@ -73,7 +73,9 @@ Key features:
   - Repository creation and management  
   - Task planning and coordination  
   - Final documentation merging and submission  
-  - Oversight of system integration  
+  - Oversight of system integration
+  - Database Creation
+  - Create Project Structure
 
 ---
 
