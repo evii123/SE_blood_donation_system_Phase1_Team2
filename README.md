@@ -10,14 +10,14 @@ The platform connects three actor types:
 ## Team Information
 
 ### Team Name
-- `Team2`
+- `TeamC2`
 
 ### Team Leader
 - **`Evi Shedula`** (`@evii123`) - **Team Leader**
 
 ### Team Members
 - **`Evi Shedula`** (`@evii123`) - `eshedula23@epoka.edu.al` - **Team Leader**
-- **`Alma Hado`** (`@Alma1406`) - `hado.alma14@gmail.com` - **Team Member**
+- **`Alma Hado`** (`@Alma140666`) - `ahado23@epoka.edu.al` - **Team Member**
 - **`Elda Cami`** (`@ecami23epoka>`) - `ecami23@epoka.edu.al` - **Team Member**
 - **`Samed Kokici`** (`@samedkokicii>`) - `skokici23@epoka.edu.al` - **Team Member**
 - **`Frenklin Mehmeti`** (`@FM12344>`) - `fmehmeti23@epoka.edu.al` - **Team Member**
