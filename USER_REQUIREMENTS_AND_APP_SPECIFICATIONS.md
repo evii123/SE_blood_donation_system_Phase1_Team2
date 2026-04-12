@@ -1,4 +1,4 @@
-# Phase II: User Requirements and Application Specifications
+# Phase II: System Requirements
 
 Project: **Blood Donation System**
 
