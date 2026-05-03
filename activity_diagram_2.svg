@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980">
+<defs><style>.t{font:700 37px Arial;fill:#1f2937}.n{fill:#dcfce7;stroke:#16a34a;stroke-width:2.3;rx:12}.d{fill:#ecfccb;stroke:#65a30d;stroke-width:2.3}.txt{font:600 18px Arial;fill:#111827}.arr{stroke:#334155;stroke-width:2.3;fill:none;marker-end:url(#a)}</style><marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#334155"/></marker></defs>
+<text x="800" y="45" text-anchor="middle" class="t">Activity Diagram 2: Bank Fulfills Hospital Request</text>
+<circle cx="800" cy="90" r="16" fill="#111827"/>
+<rect x="650" y="130" width="300" height="52" class="n"/><text x="800" y="162" text-anchor="middle" class="txt">Login as Bank Staff</text>
+<rect x="620" y="210" width="360" height="52" class="n"/><text x="800" y="242" text-anchor="middle" class="txt">Open Requests Management Page</text>
+<rect x="660" y="290" width="280" height="52" class="n"/><text x="800" y="322" text-anchor="middle" class="txt">Select Request</text>
+<rect x="680" y="370" width="240" height="52" class="n"/><text x="800" y="402" text-anchor="middle" class="txt">Choose Fulfill</text>
+<rect x="620" y="450" width="360" height="52" class="n"/><text x="800" y="482" text-anchor="middle" class="txt">Lock Inventory Row (Transaction)</text>
+<polygon points="800,530 930,600 800,670 670,600" class="d"/><text x="800" y="606" text-anchor="middle" class="txt">Enough Units?</text>
+<rect x="980" y="574" width="420" height="52" class="n"/><text x="1190" y="606" text-anchor="middle" class="txt">Rollback and Show Insufficient Stock</text>
+<rect x="500" y="700" width="600" height="52" class="n"/><text x="800" y="732" text-anchor="middle" class="txt">Deduct Inventory and Set Request = Fulfilled</text>
+<rect x="690" y="780" width="220" height="52" class="n"/><text x="800" y="812" text-anchor="middle" class="txt">Commit</text>
+<rect x="690" y="860" width="220" height="52" class="n"/><text x="800" y="892" text-anchor="middle" class="txt">Show Success</text>
+<circle cx="800" cy="940" r="16" fill="#111827"/>
+<line x1="800" y1="106" x2="800" y2="130" class="arr"/>
+<line x1="800" y1="182" x2="800" y2="210" class="arr"/>
+<line x1="800" y1="262" x2="800" y2="290" class="arr"/>
+<line x1="800" y1="342" x2="800" y2="370" class="arr"/>
+<line x1="800" y1="422" x2="800" y2="450" class="arr"/>
+<line x1="800" y1="502" x2="800" y2="530" class="arr"/>
+<line x1="930" y1="600" x2="980" y2="600" class="arr"/><text x="945" y="590" class="txt">No</text>
+<line x1="800" y1="670" x2="800" y2="700" class="arr"/><text x="815" y="690" class="txt">Yes</text>
+<line x1="800" y1="752" x2="800" y2="780" class="arr"/>
+<line x1="800" y1="832" x2="800" y2="860" class="arr"/>
+<line x1="800" y1="912" x2="800" y2="924" class="arr"/>
+<line x1="1400" y1="600" x2="1500" y2="600" class="arr"/>
+<line x1="1500" y1="600" x2="1500" y2="940" class="arr"/>
+<line x1="1500" y1="940" x2="816" y2="940" class="arr"/>
+</svg>

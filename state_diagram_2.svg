@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="650" viewBox="0 0 1500 650">
+<defs><style>.t{font:700 35px Arial;fill:#1f2937}.s{fill:#e0f2fe;stroke:#0369a1;stroke-width:2.3;rx:12}.txt{font:600 18px Arial;fill:#111827}.arr{stroke:#4b5563;stroke-width:2.53;fill:none;marker-end:url(#a)}</style><marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#4b5563"/></marker></defs>
+<text x="750" y="45" text-anchor="middle" class="t">State Diagram 2: Blood Request Lifecycle</text>
+<circle cx="120" cy="280" r="16" fill="#111827"/>
+<rect x="260" y="240" width="220" height="80" class="s"/><text x="370" y="287" text-anchor="middle" class="txt">Pending</text>
+<rect x="620" y="240" width="220" height="80" class="s"/><text x="730" y="287" text-anchor="middle" class="txt">Approved</text>
+<rect x="980" y="240" width="220" height="80" class="s"/><text x="1090" y="287" text-anchor="middle" class="txt">Fulfilled</text>
+<rect x="620" y="430" width="220" height="80" class="s"/><text x="730" y="477" text-anchor="middle" class="txt">Rejected</text>
+<line x1="136" y1="280" x2="260" y2="280" class="arr"/>
+<line x1="480" y1="280" x2="620" y2="280" class="arr"/><text x="550" y="265" class="txt">approve</text>
+<line x1="840" y1="280" x2="980" y2="280" class="arr"/><text x="885" y="265" class="txt">fulfill (stock ok)</text>
+<path d="M370 320 L370 470 L620 470" class="arr"/><text x="430" y="455" class="txt">reject</text>
+<path d="M730 320 L730 430" class="arr"/><text x="742" y="390" class="txt">reject</text>
+<path d="M730 240 C 730 150, 1090 150, 1090 240" class="arr"/><text x="900" y="145" class="txt">fulfill (stock ok)</text>
+<circle cx="1320" cy="280" r="16" fill="#111827"/>
+<line x1="1200" y1="280" x2="1304" y2="280" class="arr"/>
+<circle cx="900" cy="470" r="16" fill="#111827"/>
+<line x1="840" y1="470" x2="884" y2="470" class="arr"/>
+</svg>

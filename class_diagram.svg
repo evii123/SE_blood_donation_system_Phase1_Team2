@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100">
+  <defs>
+    <style>
+      .title { font:700 37px Arial, sans-serif; fill: #1f2937; }
+      .box { fill: #e9f7ef; stroke: #2f855a; stroke-width:2.53; rx: 10; }
+      .head { font:700 22px Arial, sans-serif; fill: #1f2937; }
+      .txt { font:500 18px Arial, sans-serif; fill: #1f2937; }
+      .line { stroke: #2f855a; stroke-width:2.07; }
+      .assoc { stroke: #c77d1a; stroke-width:2.64; fill: none; marker-end: url(#arrow); }
+      .label { font:600 18px Arial, sans-serif; fill: #8b5e1a; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#c77d1a" />
+    </marker>
+  </defs>
+
+  <text x="900" y="45" text-anchor="middle" class="title">Class Diagram of Blood Donation System</text>
+
+  <!-- User -->
+  <g transform="translate(740,120)">
+    <rect width="320" height="210" class="box"/>
+    <line x1="0" y1="45" x2="320" y2="45" class="line"/>
+    <line x1="0" y1="135" x2="320" y2="135" class="line"/>
+    <text x="160" y="30" text-anchor="middle" class="head">User</text>
+    <text x="14" y="68" class="txt">+id: int</text>
+    <text x="14" y="88" class="txt">+name: string</text>
+    <text x="14" y="108" class="txt">+email: string</text>
+    <text x="14" y="128" class="txt">+role: string</text>
+    <text x="14" y="158" class="txt">+login(email, password)</text>
+    <text x="14" y="178" class="txt">+logout()</text>
+    <text x="14" y="198" class="txt">+updateProfile()</text>
+  </g>
+
+  <!-- Donor -->
+  <g transform="translate(340,420)">
+    <rect width="330" height="250" class="box"/>
+    <line x1="0" y1="45" x2="330" y2="45" class="line"/>
+    <line x1="0" y1="145" x2="330" y2="145" class="line"/>
+    <text x="165" y="30" text-anchor="middle" class="head">Donor</text>
+    <text x="14" y="68" class="txt">+bloodGroup: string</text>
+    <text x="14" y="88" class="txt">+donorIdNumber: string</text>
+    <text x="14" y="108" class="txt">+address: string</text>
+    <text x="14" y="128" class="txt">+lastDonationDate: date</text>
+    <text x="14" y="168" class="txt">+bookAppointment(bankId, date, slot)</text>
+    <text x="14" y="188" class="txt">+cancelAppointment(appointmentId)</text>
+    <text x="14" y="208" class="txt">+viewAppointmentHistory()</text>
+    <text x="14" y="228" class="txt">+checkEligibility()</text>
+  </g>
+
+  <!-- Bank -->
+  <g transform="translate(740,420)">
+    <rect width="320" height="250" class="box"/>
+    <line x1="0" y1="45" x2="320" y2="45" class="line"/>
+    <line x1="0" y1="125" x2="320" y2="125" class="line"/>
+    <text x="160" y="30" text-anchor="middle" class="head">Bank</text>
+    <text x="14" y="68" class="txt">+address: string</text>
+    <text x="14" y="88" class="txt">+approveAppointment(id)</text>
+    <text x="14" y="108" class="txt">+completeAppointment(id)</text>
+    <text x="14" y="148" class="txt">+cancelAppointment(id)</text>
+    <text x="14" y="168" class="txt">+updateInventory(group, units)</text>
+    <text x="14" y="188" class="txt">+processRequest(id, action)</text>
+    <text x="14" y="208" class="txt">+searchDonorInfo(query)</text>
+  </g>
+
+  <!-- Hospital -->
+  <g transform="translate(1140,420)">
+    <rect width="320" height="230" class="box"/>
+    <line x1="0" y1="45" x2="320" y2="45" class="line"/>
+    <line x1="0" y1="105" x2="320" y2="105" class="line"/>
+    <text x="160" y="30" text-anchor="middle" class="head">Hospital</text>
+    <text x="14" y="68" class="txt">+address: string</text>
+    <text x="14" y="88" class="txt">+createRequest(bank, group, units)</text>
+    <text x="14" y="128" class="txt">+viewRequestHistory()</text>
+    <text x="14" y="148" class="txt">+trackRequestStatus()</text>
+    <text x="14" y="168" class="txt">+viewInventoryOverview()</text>
+  </g>
+
+  <!-- Appointment -->
+  <g transform="translate(220,760)">
+    <rect width="350" height="250" class="box"/>
+    <line x1="0" y1="45" x2="350" y2="45" class="line"/>
+    <line x1="0" y1="145" x2="350" y2="145" class="line"/>
+    <text x="175" y="30" text-anchor="middle" class="head">Appointment</text>
+    <text x="14" y="68" class="txt">+id: int</text>
+    <text x="14" y="88" class="txt">+appointmentDate: date</text>
+    <text x="14" y="108" class="txt">+timeSlot: enum</text>
+    <text x="14" y="128" class="txt">+status: enum</text>
+    <text x="14" y="168" class="txt">+approve()</text>
+    <text x="14" y="188" class="txt">+complete()</text>
+    <text x="14" y="208" class="txt">+cancel()</text>
+    <text x="14" y="228" class="txt">+reschedule()</text>
+  </g>
+
+  <!-- Inventory -->
+  <g transform="translate(680,760)">
+    <rect width="320" height="230" class="box"/>
+    <line x1="0" y1="45" x2="320" y2="45" class="line"/>
+    <line x1="0" y1="125" x2="320" y2="125" class="line"/>
+    <text x="160" y="30" text-anchor="middle" class="head">Inventory</text>
+    <text x="14" y="68" class="txt">+bloodGroup: string</text>
+    <text x="14" y="88" class="txt">+units: int</text>
+    <text x="14" y="108" class="txt">+bankId: int</text>
+    <text x="14" y="148" class="txt">+increment()</text>
+    <text x="14" y="168" class="txt">+decrement(units)</text>
+    <text x="14" y="188" class="txt">+hasEnough(units)</text>
+  </g>
+
+  <!-- Request -->
+  <g transform="translate(1080,760)">
+    <rect width="350" height="250" class="box"/>
+    <line x1="0" y1="45" x2="350" y2="45" class="line"/>
+    <line x1="0" y1="145" x2="350" y2="145" class="line"/>
+    <text x="175" y="30" text-anchor="middle" class="head">Request</text>
+    <text x="14" y="68" class="txt">+id: int</text>
+    <text x="14" y="88" class="txt">+bloodGroup: string</text>
+    <text x="14" y="108" class="txt">+unitsRequested: int</text>
+    <text x="14" y="128" class="txt">+status: enum</text>
+    <text x="14" y="168" class="txt">+approve()</text>
+    <text x="14" y="188" class="txt">+reject()</text>
+    <text x="14" y="208" class="txt">+fulfill()</text>
+    <text x="14" y="228" class="txt">+cancel()</text>
+  </g>
+
+  <!-- Inheritance lines from User -->
+  <line x1="820" y1="330" x2="505" y2="420" class="assoc" />
+  <text x="640" y="380" class="label">inherits</text>
+  <line x1="900" y1="330" x2="900" y2="420" class="assoc" />
+  <text x="910" y="380" class="label">inherits</text>
+  <line x1="980" y1="330" x2="1300" y2="420" class="assoc" />
+  <text x="1120" y="380" class="label">inherits</text>
+
+  <!-- Associations -->
+  <line x1="500" y1="670" x2="390" y2="760" class="assoc" />
+  <text x="390" y="710" class="label">books 1..*</text>
+
+  <line x1="840" y1="670" x2="520" y2="790" class="assoc" />
+  <text x="650" y="730" class="label">manages appointments</text>
+
+  <line x1="900" y1="670" x2="840" y2="760" class="assoc" />
+  <text x="850" y="720" class="label">maintains 1..*</text>
+
+  <line x1="1240" y1="650" x2="1240" y2="760" class="assoc" />
+  <text x="1250" y="710" class="label">creates 1..*</text>
+
+  <line x1="980" y1="640" x2="1080" y2="830" class="assoc" />
+  <text x="1015" y="740" class="label">processes</text>
+
+  <line x1="1000" y1="850" x2="1080" y2="880" class="assoc" />
+  <text x="1000" y="890" class="label">stock check for fulfill</text>
+</svg>

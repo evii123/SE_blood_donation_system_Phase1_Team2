@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <style>
+      .title { font:700 35px Arial, sans-serif; fill: #1f2937; }
+      .label { font:600 20px Arial, sans-serif; fill: #111827; }
+      .small { font:500 18px Arial, sans-serif; fill: #111827; }
+      .box { fill: #f8fafc; stroke: #334155; stroke-width:2.3; rx: 10; }
+      .group { fill: none; stroke: #94a3b8; stroke-width:2.3; stroke-dasharray: 8 6; rx: 12; }
+      .arrow { stroke: #334155; stroke-width:2.53; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#334155" />
+    </marker>
+  </defs>
+
+  <text x="800" y="45" text-anchor="middle" class="title">Component Diagram of Blood Donation System</text>
+
+  <!-- Group Frames -->
+  <rect x="60" y="90" width="360" height="700" class="group" />
+  <text x="240" y="120" text-anchor="middle" class="label">Left Side: Actors / Entry</text>
+
+  <rect x="470" y="90" width="660" height="700" class="group" />
+  <text x="800" y="120" text-anchor="middle" class="label">Middle Side: Core Components + Data Access</text>
+
+  <rect x="1180" y="90" width="360" height="700" class="group" />
+  <text x="1360" y="120" text-anchor="middle" class="label">Right Side: Technical Infrastructure</text>
+
+  <!-- Left Side -->
+  <rect x="120" y="180" width="240" height="55" class="box" /><text x="240" y="214" text-anchor="middle" class="small">Donor</text>
+  <rect x="120" y="260" width="240" height="55" class="box" /><text x="240" y="294" text-anchor="middle" class="small">Bank Staff</text>
+  <rect x="120" y="340" width="240" height="55" class="box" /><text x="240" y="374" text-anchor="middle" class="small">Hospital Staff</text>
+  <rect x="120" y="420" width="240" height="55" class="box" /><text x="240" y="454" text-anchor="middle" class="small">System Admin</text>
+  <rect x="95" y="560" width="290" height="85" class="box" />
+  <text x="240" y="600" text-anchor="middle" class="small">Blood Donation Web System</text>
+
+  <!-- Middle Side Components -->
+  <rect x="570" y="180" width="260" height="55" class="box" /><text x="700" y="214" text-anchor="middle" class="small">Auth</text>
+  <rect x="570" y="260" width="260" height="55" class="box" /><text x="700" y="294" text-anchor="middle" class="small">Donor Management</text>
+  <rect x="570" y="340" width="260" height="55" class="box" /><text x="700" y="374" text-anchor="middle" class="small">Appointment Management</text>
+  <rect x="570" y="420" width="260" height="55" class="box" /><text x="700" y="454" text-anchor="middle" class="small">Inventory Management</text>
+  <rect x="570" y="500" width="260" height="55" class="box" /><text x="700" y="534" text-anchor="middle" class="small">Request Management</text>
+
+  <rect x="900" y="180" width="190" height="55" class="box" /><text x="995" y="214" text-anchor="middle" class="small">Data Access</text>
+  <rect x="900" y="260" width="190" height="55" class="box" /><text x="995" y="294" text-anchor="middle" class="small">Data Access</text>
+  <rect x="900" y="340" width="190" height="55" class="box" /><text x="995" y="374" text-anchor="middle" class="small">Data Access</text>
+  <rect x="900" y="420" width="190" height="55" class="box" /><text x="995" y="454" text-anchor="middle" class="small">Data Access</text>
+  <rect x="900" y="500" width="190" height="55" class="box" /><text x="995" y="534" text-anchor="middle" class="small">Data Access</text>
+
+  <!-- Right Side -->
+  <rect x="1240" y="220" width="240" height="90" class="box" />
+  <text x="1360" y="258" text-anchor="middle" class="small">Security</text>
+  <text x="1360" y="282" text-anchor="middle" class="small">Authentication / Authorization</text>
+
+  <rect x="1240" y="390" width="240" height="70" class="box" />
+  <text x="1360" y="432" text-anchor="middle" class="small">Persistence</text>
+
+  <rect x="1240" y="560" width="240" height="70" class="box" />
+  <text x="1360" y="602" text-anchor="middle" class="small">Database (MySQL)</text>
+
+  <!-- Arrows Left -> WebApp -->
+  <line x1="360" y1="207" x2="470" y2="602" class="arrow" />
+  <line x1="360" y1="287" x2="470" y2="602" class="arrow" />
+  <line x1="360" y1="367" x2="470" y2="602" class="arrow" />
+  <line x1="360" y1="447" x2="470" y2="602" class="arrow" />
+
+  <!-- WebApp -> Components -->
+  <line x1="385" y1="602" x2="570" y2="207" class="arrow" />
+  <line x1="385" y1="602" x2="570" y2="287" class="arrow" />
+  <line x1="385" y1="602" x2="570" y2="367" class="arrow" />
+  <line x1="385" y1="602" x2="570" y2="447" class="arrow" />
+  <line x1="385" y1="602" x2="570" y2="527" class="arrow" />
+
+  <!-- Components -> Data Access -->
+  <line x1="830" y1="207" x2="900" y2="207" class="arrow" />
+  <line x1="830" y1="287" x2="900" y2="287" class="arrow" />
+  <line x1="830" y1="367" x2="900" y2="367" class="arrow" />
+  <line x1="830" y1="447" x2="900" y2="447" class="arrow" />
+  <line x1="830" y1="527" x2="900" y2="527" class="arrow" />
+
+  <!-- Components -> Security -->
+  <line x1="830" y1="207" x2="1240" y2="245" class="arrow" />
+  <line x1="830" y1="287" x2="1240" y2="260" class="arrow" />
+  <line x1="830" y1="367" x2="1240" y2="275" class="arrow" />
+  <line x1="830" y1="447" x2="1240" y2="290" class="arrow" />
+  <line x1="830" y1="527" x2="1240" y2="305" class="arrow" />
+
+  <!-- Data Access -> Persistence -->
+  <line x1="1090" y1="207" x2="1240" y2="405" class="arrow" />
+  <line x1="1090" y1="287" x2="1240" y2="420" class="arrow" />
+  <line x1="1090" y1="367" x2="1240" y2="435" class="arrow" />
+  <line x1="1090" y1="447" x2="1240" y2="450" class="arrow" />
+  <line x1="1090" y1="527" x2="1240" y2="460" class="arrow" />
+
+  <!-- Security -> Persistence -> DB -->
+  <line x1="1360" y1="310" x2="1360" y2="390" class="arrow" />
+  <line x1="1360" y1="460" x2="1360" y2="560" class="arrow" />
+</svg>
