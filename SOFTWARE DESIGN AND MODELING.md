@@ -430,12 +430,3 @@ stateDiagram-v2
     Rejected --> [*]
 ```
 
-## 4. Summary of Required Quantities
-- Component Diagram (UML): **1**
-- Class Diagram: **1**
-- Sequence Diagrams: **3**
-- Use Case Diagram: **1**
-- Activity Diagrams: **2**
-- State Diagrams: **2**
-
-This document is structured to match the Phase III specification from the provided PDF.
