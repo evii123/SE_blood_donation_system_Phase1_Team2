@@ -2,7 +2,6 @@
 
 Project: **Blood Donation System**
 
-Submission alignment reference: **Phase_III_Software_Design (1).pdf**
 
 ## 1. Software Architecture
 
@@ -233,7 +232,7 @@ classDiagram
     AuthService ..> User
 ```
 
-### 2.2 Sequence Diagrams — Quantity: 3
+### 2.2 Sequence Diagrams 
 
 ![Sequence Diagram 1](./sequence_diagram_1.svg)
 
@@ -268,63 +267,56 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     actor BankStaff as Bank Staff
-    participant UI as Bank Manage Appointments Page
-    participant BS as BankService
+    participant BSys as Bank System
+    participant BS as Bank Service
     participant DB as Database
 
-    BankStaff->>UI: Click Complete on appointment
-    UI->>BS: processBankAppointmentAction(id, complete)
+    BankStaff->>BSys: Click Complete
+    BSys->>BS: processBankAppointmentAction(id,complete)
     BS->>DB: BEGIN TRANSACTION
-    BS->>DB: SELECT appointment + donor blood group FOR UPDATE
-    DB-->>BS: Appointment row
-    BS->>DB: UPDATE appointment status=completed
-    BS->>DB: UPDATE donor last_donation_date
-    BS->>DB: UPSERT inventory units +1
+    BS->>DB: Fetch appointment + donor blood group
+    BS->>DB: Update appointment = completed
+    BS->>DB: Update donor last donation date
+    BS->>DB: Upsert inventory +1
     BS->>DB: COMMIT
-    BS-->>UI: Success
-    UI-->>BankStaff: Appointment marked completed
+    BS-->>BSys: Return success
+    BSys-->>BankStaff: Show completed status
 ```
 
 #### Sequence 3: Hospital request fulfillment by bank
 ```mermaid
 sequenceDiagram
     actor HospitalStaff as Hospital Staff
-    participant HUI as Hospital Request Page
-    participant HS as HospitalService
+    participant HSys as Hospital System
+    participant BS as Bank Service
     participant DB as Database
-    actor BankStaff as Bank Staff
-    participant BUI as Bank Requests Page
-    participant BS as BankService
 
-    HospitalStaff->>HUI: Create request(bank, blood group, units)
-    HUI->>HS: createHospitalRequest(data)
-    HS->>DB: INSERT request(status=pending)
-    DB-->>HS: Insert OK
-    HS-->>HUI: Request submitted
+    HospitalStaff->>HSys: Create request
+    HSys->>DB: Insert request (pending)
+    DB-->>HSys: Request saved
 
-    BankStaff->>BUI: Click Fulfill on request
-    BUI->>BS: processBankRequestAction(id, fulfill)
-    BS->>DB: BEGIN TRANSACTION
-    BS->>DB: SELECT inventory FOR UPDATE
+    HospitalStaff->>HSys: Track request status
+    HSys->>BS: Bank processes fulfill action
+    BS->>DB: BEGIN + lock inventory row
     DB-->>BS: Current stock
-    alt Enough stock
-        BS->>DB: UPDATE inventory (units - requested)
-        BS->>DB: UPDATE request status=fulfilled
-        BS->>DB: COMMIT
-        BS-->>BUI: Fulfilled
-    else Insufficient stock
-        BS->>DB: ROLLBACK
-        BS-->>BUI: Not enough units
+    alt Success
+        BS->>DB: If enough: deduct units + fulfill
+        BS-->>HSys: Return success
+        HSys-->>HospitalStaff: Show fulfilled
+    else Fail
+        DB-->>BS: Else: rollback
+        BS-->>HSys: Return failure
+        HSys-->>HospitalStaff: Show failure
     end
 ```
 
 ## 3. Modeling
 
-### 3.1 Use Case Diagram — Quantity: 1 (all users included)
+### 3.1 Use Case Diagram — (all users included)
 ![Use Case Diagram](./use_case_diagram.svg)
 
 ```mermaid
-flowchart LR
+flowchart TB
     Donor((Donor))
     Bank((Bank Staff))
     Hospital((Hospital Staff))
@@ -333,30 +325,42 @@ flowchart LR
     UC2([Manage Donor Profile])
     UC3([Book Appointment])
     UC4([View / Cancel Appointments])
-    UC5([Review/Approve/Complete/Cancel Appointment])
-    UC6([Search Donor Info])
-    UC7([Manage Inventory])
-    UC8([Create Blood Request])
-    UC9([Approve/Reject/Fulfill Request])
-    UC10([View Request History])
+    UC5([Create / Track Blood Requests])
+    UC6([Approve / Reject / Fulfill Request])
+    UC7([Validate Credentials])
+    UC8([Check Eligibility])
+    UC9([Check Slot Availability])
+    UC10([Notify User])
+    UC11([Review / Approve / Complete Appointment])
+    UC12([Manage Inventory])
+    UC13([Update Inventory / Request Status])
 
     Donor --> UC1
     Donor --> UC2
     Donor --> UC3
     Donor --> UC4
 
-    Bank --> UC1
-    Bank --> UC5
+    Bank --> UC11
+    Bank --> UC12
     Bank --> UC6
-    Bank --> UC7
-    Bank --> UC9
 
     Hospital --> UC1
-    Hospital --> UC8
-    Hospital --> UC10
+    Hospital --> UC5
+    Hospital --> UC6
+
+    UC1 -. "<<include>>" .-> UC7
+    UC3 -. "<<include>>" .-> UC8
+    UC3 -. "<<include>>" .-> UC9
+    UC11 -. "<<include>>" .-> UC10
+    UC6 -. "<<include>>" .-> UC13
+    UC12 -. "<<include>>" .-> UC13
+
+    UC4 -. "<<extend>>" .-> UC3
+    UC11 -. "<<extend>>" .-> UC5
+    UC11 -. "<<extend>>" .-> UC6
 ```
 
-### 3.2 Activity Diagrams — Quantity: 2
+### 3.2 Activity Diagrams — 
 
 ![Activity Diagram 1](./activity_diagram_1.svg)
 
@@ -398,11 +402,11 @@ flowchart TD
     M --> I([End])
 ```
 
-### 3.3 State Diagrams — Quantity: 2
+### 3.3 State Diagrams 
 
 ![State Diagram 1](./state_diagram_1.svg)
 
-![State Diagram 2](./state_diagram_2.svg)
+
 
 #### State Diagram 1: Appointment lifecycle
 ```mermaid
@@ -418,15 +422,20 @@ stateDiagram-v2
 ```
 
 #### State Diagram 2: Blood request lifecycle
+![State Diagram 2](./state_diagram_2.svg)
+
+Mermaid source:
 ```mermaid
 stateDiagram-v2
-    [*] --> Pending
+    [*] --> Draft
+    Draft --> Pending: submit request
     Pending --> Approved: approve
     Pending --> Rejected: reject
-    Pending --> Fulfilled: fulfill (if stock ok)
-    Approved --> Rejected: reject
-    Approved --> Fulfilled: fulfill (if stock ok)
-    Fulfilled --> [*]
+    Pending --> Cancelled: hospital cancel
+    Approved --> PartiallyFulfilled: partial stock issued
+    Approved --> Fulfilled: full stock issued
+    PartiallyFulfilled --> Fulfilled: remaining units issued
     Rejected --> [*]
+    Cancelled --> [*]
+    Fulfilled --> [*]
 ```
-

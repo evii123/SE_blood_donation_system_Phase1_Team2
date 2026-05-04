@@ -1,19 +1,86 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="650" viewBox="0 0 1500 650">
-<defs><style>.t{font:700 35px Arial;fill:#1f2937}.s{fill:#e0f2fe;stroke:#0369a1;stroke-width:2.3;rx:12}.txt{font:600 18px Arial;fill:#111827}.arr{stroke:#4b5563;stroke-width:2.53;fill:none;marker-end:url(#a)}</style><marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#4b5563"/></marker></defs>
-<text x="750" y="45" text-anchor="middle" class="t">State Diagram 2: Blood Request Lifecycle</text>
-<circle cx="120" cy="280" r="16" fill="#111827"/>
-<rect x="260" y="240" width="220" height="80" class="s"/><text x="370" y="287" text-anchor="middle" class="txt">Pending</text>
-<rect x="620" y="240" width="220" height="80" class="s"/><text x="730" y="287" text-anchor="middle" class="txt">Approved</text>
-<rect x="980" y="240" width="220" height="80" class="s"/><text x="1090" y="287" text-anchor="middle" class="txt">Fulfilled</text>
-<rect x="620" y="430" width="220" height="80" class="s"/><text x="730" y="477" text-anchor="middle" class="txt">Rejected</text>
-<line x1="136" y1="280" x2="260" y2="280" class="arr"/>
-<line x1="480" y1="280" x2="620" y2="280" class="arr"/><text x="550" y="265" class="txt">approve</text>
-<line x1="840" y1="280" x2="980" y2="280" class="arr"/><text x="885" y="265" class="txt">fulfill (stock ok)</text>
-<path d="M370 320 L370 470 L620 470" class="arr"/><text x="430" y="455" class="txt">reject</text>
-<path d="M730 320 L730 430" class="arr"/><text x="742" y="390" class="txt">reject</text>
-<path d="M730 240 C 730 150, 1090 150, 1090 240" class="arr"/><text x="900" y="145" class="txt">fulfill (stock ok)</text>
-<circle cx="1320" cy="280" r="16" fill="#111827"/>
-<line x1="1200" y1="280" x2="1304" y2="280" class="arr"/>
-<circle cx="900" cy="470" r="16" fill="#111827"/>
-<line x1="840" y1="470" x2="884" y2="470" class="arr"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="State Diagram 2: Blood Request Lifecycle">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 30px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 16px Arial, sans-serif; fill: #475569; }
+      .state { fill: #e0f2fe; stroke: #1e3a8a; stroke-width: 2.2; }
+      .stateText { font: 700 16px Arial, sans-serif; fill: #0f172a; text-anchor: middle; dominant-baseline: middle; }
+      .edge { stroke: #334155; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .edgeText { font: 600 14px Arial, sans-serif; fill: #1e293b; }
+      .start { fill: #0f172a; }
+      .finalOuter { fill: #ffffff; stroke: #0f172a; stroke-width: 2.2; }
+      .finalInner { fill: #0f172a; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1280" height="720"/>
+  <text class="title" x="36" y="54">State Diagram 2: Blood Request Lifecycle</text>
+  <text class="subtitle" x="36" y="84">Clear flow from request creation to completion or termination</text>
+
+  <!-- Start -->
+  <circle class="start" cx="90" cy="220" r="10"/>
+
+  <!-- Primary states -->
+  <ellipse class="state" cx="230" cy="220" rx="95" ry="36"/>
+  <text class="stateText" x="230" y="220">Draft</text>
+
+  <ellipse class="state" cx="450" cy="220" rx="110" ry="36"/>
+  <text class="stateText" x="450" y="220">Pending Review</text>
+
+  <ellipse class="state" cx="680" cy="120" rx="105" ry="36"/>
+  <text class="stateText" x="680" y="120">Approved</text>
+
+  <ellipse class="state" cx="680" cy="220" rx="105" ry="36"/>
+  <text class="stateText" x="680" y="220">Rejected</text>
+
+  <ellipse class="state" cx="680" cy="320" rx="105" ry="36"/>
+  <text class="stateText" x="680" y="320">Cancelled</text>
+
+  <ellipse class="state" cx="930" cy="120" rx="145" ry="36"/>
+  <text class="stateText" x="930" y="120">Partially Fulfilled</text>
+
+  <ellipse class="state" cx="1140" cy="120" rx="100" ry="36"/>
+  <text class="stateText" x="1140" y="120">Fulfilled</text>
+
+  <!-- Final states -->
+  <circle class="finalOuter" cx="860" cy="220" r="14"/>
+  <circle class="finalInner" cx="860" cy="220" r="7"/>
+
+  <circle class="finalOuter" cx="860" cy="320" r="14"/>
+  <circle class="finalInner" cx="860" cy="320" r="7"/>
+
+  <circle class="finalOuter" cx="1230" cy="120" r="14"/>
+  <circle class="finalInner" cx="1230" cy="120" r="7"/>
+
+  <!-- Transitions -->
+  <path class="edge" d="M100 220 L135 220"/>
+
+  <path class="edge" d="M325 220 L340 220"/>
+  <text class="edgeText" x="255" y="198">submit request</text>
+
+  <path class="edge" d="M560 208 C610 175 625 145 585 128"/>
+  <text class="edgeText" x="575" y="168">approve</text>
+
+  <path class="edge" d="M560 220 L575 220"/>
+  <text class="edgeText" x="575" y="202">reject</text>
+
+  <path class="edge" d="M560 232 C610 265 625 295 585 312"/>
+  <text class="edgeText" x="560" y="280">hospital cancels</text>
+
+  <path class="edge" d="M785 120 L790 120"/>
+  <text class="edgeText" x="792" y="98">partial stock issued</text>
+
+  <path class="edge" d="M785 106 C875 65 1030 65 1040 106"/>
+  <text class="edgeText" x="885" y="62">full stock issued</text>
+
+  <path class="edge" d="M1030 120 L1040 120"/>
+  <text class="edgeText" x="1036" y="98">remaining units issued</text>
+
+  <path class="edge" d="M785 220 L846 220"/>
+  <path class="edge" d="M785 320 L846 320"/>
+  <path class="edge" d="M1240 120 L1216 120"/>
 </svg>
