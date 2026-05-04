@@ -27,67 +27,7 @@ Example architecture flow (project-specific):
 ### 1.2 Component Diagram (UML) — Quantity: 1
 ![Component Diagram](./component_diagram.svg)
 
-```mermaid
-flowchart LR
-    %% Left side: external actors / entry systems
-    Donor[Donor]
-    BankStaff[Bank Staff]
-    HospitalStaff[Hospital Staff]
-    Admin[System Admin]
 
-    WebApp[Blood Donation Web System]
-
-    Donor --> WebApp
-    BankStaff --> WebApp
-    HospitalStaff --> WebApp
-    Admin --> WebApp
-
-    %% Middle side: core application components
-    Auth[Auth]
-    DonorMgmt[Donor Management]
-    Appointment[Appointment Management]
-    Inventory[Inventory Management]
-    Request[Request Management]
-
-    WebApp --> Auth
-    WebApp --> DonorMgmt
-    WebApp --> Appointment
-    WebApp --> Inventory
-    WebApp --> Request
-
-    %% Data access interfaces from middle components
-    AuthDA[(Data Access)]
-    DonorDA[(Data Access)]
-    AppointmentDA[(Data Access)]
-    InventoryDA[(Data Access)]
-    RequestDA[(Data Access)]
-
-    Auth --> AuthDA
-    DonorMgmt --> DonorDA
-    Appointment --> AppointmentDA
-    Inventory --> InventoryDA
-    Request --> RequestDA
-
-    %% Right side: technical components
-    Security[Security\nAuthentication\nAuthorization]
-    Persistence[Persistence]
-    Database[(Database)]
-
-    Auth --> Security
-    DonorMgmt --> Security
-    Appointment --> Security
-    Inventory --> Security
-    Request --> Security
-
-    AuthDA --> Persistence
-    DonorDA --> Persistence
-    AppointmentDA --> Persistence
-    InventoryDA --> Persistence
-    RequestDA --> Persistence
-
-    Security --> Persistence
-    Persistence --> Database
-```
 
 Component-side explanation (format requested):
 - **Left side (Actors/System Entry):**
@@ -106,301 +46,43 @@ Component-side explanation (format requested):
 
 ## 2. Detailed Design
 
-### 2.1 Class Diagram — Quantity: 1 (includes all major classes)
+### 2.1 Class Diagram 
 ![Class Diagram](./class_diagram.svg)
 
-```mermaid
-classDiagram
-    class User {
-      +int id
-      +string name
-      +string email
-      +string passwordHash
-      +string role
-      +string phone
-      +string city
-      +login(email, password)
-      +logout()
-    }
-
-    class Donor {
-      +int id
-      +string bloodGroup
-      +string donorIdNumber
-      +string address
-      +date lastDonationDate
-      +bookAppointment(bankId, date, timeSlot)
-      +cancelAppointment(appointmentId)
-      +viewAppointmentHistory()
-    }
-
-    class Bank {
-      +int id
-      +string address
-      +approveAppointment(appointmentId)
-      +completeAppointment(appointmentId)
-      +cancelAppointment(appointmentId)
-      +updateInventory(bloodGroup, units)
-      +processRequest(requestId, action)
-    }
-
-    class Hospital {
-      +int id
-      +string address
-      +createRequest(bankId, bloodGroup, units)
-      +viewRequestHistory()
-    }
-
-    class Appointment {
-      +int id
-      +int donorId
-      +int bankId
-      +date appointmentDate
-      +string timeSlot
-      +string status
-      +approve()
-      +complete()
-      +cancel()
-    }
-
-    class Inventory {
-      +int id
-      +int bankId
-      +string bloodGroup
-      +int units
-      +increment()
-      +decrement(units)
-      +hasEnough(units)
-    }
-
-    class Request {
-      +int id
-      +int hospitalId
-      +int bankId
-      +string bloodGroup
-      +int unitsRequested
-      +string status
-      +approve()
-      +reject()
-      +fulfill()
-    }
-
-    class AuthService {
-      +authenticateUser(email, password)
-      +registerUser(data)
-      +validateRegistrationInput(data)
-    }
-
-    class DonorService {
-      +bookDonorAppointment(...)
-      +getDonorAppointments(...)
-      +cancelDonorAppointment(...)
-      +getDonorProfile(...)
-    }
-
-    class BankService {
-      +getBankManageAppointments(...)
-      +processBankAppointmentAction(...)
-      +upsertBankInventory(...)
-      +processBankRequestAction(...)
-    }
-
-    class HospitalService {
-      +createHospitalRequest(...)
-      +getHospitalRequestHistory(...)
-      +getHospitalDashboardData(...)
-    }
-
-    User <|-- Donor
-    User <|-- Bank
-    User <|-- Hospital
-
-    Donor "1" --> "0..*" Appointment : books
-    Bank "1" --> "0..*" Appointment : receives
-    Bank "1" --> "0..*" Inventory : maintains
-    Hospital "1" --> "0..*" Request : creates
-    Bank "1" --> "0..*" Request : handles
-
-    DonorService ..> Donor
-    DonorService ..> Appointment
-    BankService ..> Bank
-    BankService ..> Appointment
-    BankService ..> Inventory
-    BankService ..> Request
-    HospitalService ..> Hospital
-    HospitalService ..> Request
-    AuthService ..> User
-```
 
 ### 2.2 Sequence Diagrams 
 
+#### Sequence 1: Donor books appointment
+
 ![Sequence Diagram 1](./sequence_diagram_1.svg)
+
+#### Sequence 2: Bank completes appointment
 
 ![Sequence Diagram 2](./sequence_diagram_2.svg)
 
+#### Sequence 3: Hospital request fulfillment by bank
 ![Sequence Diagram 3](./sequence_diagram_3.svg)
 
-#### Sequence 1: Donor books appointment
-```mermaid
-sequenceDiagram
-    actor Donor
-    participant UI as Donor Page
-    participant DS as DonorService
-    participant DB as Database
 
-    Donor->>UI: Submit bank, date, time slot
-    UI->>DS: bookDonorAppointment(data)
-    DS->>DB: Validate donor eligibility/conflicts
-    DB-->>DS: Validation result
-    alt Valid booking
-        DS->>DB: INSERT appointment(status=pending)
-        DB-->>DS: Insert OK
-        DS-->>UI: Success response
-        UI-->>Donor: Booking confirmed
-    else Invalid booking
-        DS-->>UI: Error response
-        UI-->>Donor: Show validation error
-    end
-```
 
-#### Sequence 2: Bank completes appointment
-```mermaid
-sequenceDiagram
-    actor BankStaff as Bank Staff
-    participant BSys as Bank System
-    participant BS as Bank Service
-    participant DB as Database
 
-    BankStaff->>BSys: Click Complete
-    BSys->>BS: processBankAppointmentAction(id,complete)
-    BS->>DB: BEGIN TRANSACTION
-    BS->>DB: Fetch appointment + donor blood group
-    BS->>DB: Update appointment = completed
-    BS->>DB: Update donor last donation date
-    BS->>DB: Upsert inventory +1
-    BS->>DB: COMMIT
-    BS-->>BSys: Return success
-    BSys-->>BankStaff: Show completed status
-```
 
-#### Sequence 3: Hospital request fulfillment by bank
-```mermaid
-sequenceDiagram
-    actor HospitalStaff as Hospital Staff
-    participant HSys as Hospital System
-    participant BS as Bank Service
-    participant DB as Database
 
-    HospitalStaff->>HSys: Create request
-    HSys->>DB: Insert request (pending)
-    DB-->>HSys: Request saved
-
-    HospitalStaff->>HSys: Track request status
-    HSys->>BS: Bank processes fulfill action
-    BS->>DB: BEGIN + lock inventory row
-    DB-->>BS: Current stock
-    alt Success
-        BS->>DB: If enough: deduct units + fulfill
-        BS-->>HSys: Return success
-        HSys-->>HospitalStaff: Show fulfilled
-    else Fail
-        DB-->>BS: Else: rollback
-        BS-->>HSys: Return failure
-        HSys-->>HospitalStaff: Show failure
-    end
-```
 
 ## 3. Modeling
 
 ### 3.1 Use Case Diagram — (all users included)
+
 ![Use Case Diagram](./use_case_diagram.svg)
 
-```mermaid
-flowchart TB
-    Donor((Donor))
-    Bank((Bank Staff))
-    Hospital((Hospital Staff))
 
-    UC1([Register / Login])
-    UC2([Manage Donor Profile])
-    UC3([Book Appointment])
-    UC4([View / Cancel Appointments])
-    UC5([Create / Track Blood Requests])
-    UC6([Approve / Reject / Fulfill Request])
-    UC7([Validate Credentials])
-    UC8([Check Eligibility])
-    UC9([Check Slot Availability])
-    UC10([Notify User])
-    UC11([Review / Approve / Complete Appointment])
-    UC12([Manage Inventory])
-    UC13([Update Inventory / Request Status])
-
-    Donor --> UC1
-    Donor --> UC2
-    Donor --> UC3
-    Donor --> UC4
-
-    Bank --> UC11
-    Bank --> UC12
-    Bank --> UC6
-
-    Hospital --> UC1
-    Hospital --> UC5
-    Hospital --> UC6
-
-    UC1 -. "<<include>>" .-> UC7
-    UC3 -. "<<include>>" .-> UC8
-    UC3 -. "<<include>>" .-> UC9
-    UC11 -. "<<include>>" .-> UC10
-    UC6 -. "<<include>>" .-> UC13
-    UC12 -. "<<include>>" .-> UC13
-
-    UC4 -. "<<extend>>" .-> UC3
-    UC11 -. "<<extend>>" .-> UC5
-    UC11 -. "<<extend>>" .-> UC6
-```
-
-### 3.2 Activity Diagrams — 
+### 3.2 Activity Diagrams
 
 ![Activity Diagram 1](./activity_diagram_1.svg)
 
 ![Activity Diagram 2](./activity_diagram_2.svg)
 
-#### Activity 1: Donor appointment booking
-```mermaid
-flowchart TD
-    A([Start]) --> B[Login as Donor]
-    B --> C[Open Book Appointment Page]
-    C --> D[Choose Bank, Date, Time Slot]
-    D --> E{Input valid?}
-    E -- No --> F[Show validation error]
-    F --> D
-    E -- Yes --> G[Check eligibility/conflict]
-    G --> H{Eligible and no conflict?}
-    H -- No --> I[Show booking denied message]
-    I --> J([End])
-    H -- Yes --> K[Create pending appointment]
-    K --> L[Show success message]
-    L --> J([End])
-```
 
-#### Activity 2: Bank fulfills hospital request
-```mermaid
-flowchart TD
-    A([Start]) --> B[Login as Bank Staff]
-    B --> C[Open Requests Page]
-    C --> D[Select Request]
-    D --> E[Choose Fulfill]
-    E --> F[Lock inventory row]
-    F --> G{Enough units?}
-    G -- No --> H[Rollback + show insufficient stock]
-    H --> I([End])
-    G -- Yes --> J[Deduct inventory units]
-    J --> K[Set request status = fulfilled]
-    K --> L[Commit transaction]
-    L --> M[Show success]
-    M --> I([End])
-```
 
 ### 3.3 State Diagrams 
 
@@ -408,34 +90,7 @@ flowchart TD
 
 
 
-#### State Diagram 1: Appointment lifecycle
-```mermaid
-stateDiagram-v2
-    [*] --> Pending
-    Pending --> Approved: approve
-    Pending --> Cancelled: cancel
-    Pending --> Completed: complete
-    Approved --> Completed: complete
-    Approved --> Cancelled: cancel
-    Completed --> [*]
-    Cancelled --> [*]
-```
 
 #### State Diagram 2: Blood request lifecycle
 ![State Diagram 2](./state_diagram_2.svg)
 
-Mermaid source:
-```mermaid
-stateDiagram-v2
-    [*] --> Draft
-    Draft --> Pending: submit request
-    Pending --> Approved: approve
-    Pending --> Rejected: reject
-    Pending --> Cancelled: hospital cancel
-    Approved --> PartiallyFulfilled: partial stock issued
-    Approved --> Fulfilled: full stock issued
-    PartiallyFulfilled --> Fulfilled: remaining units issued
-    Rejected --> [*]
-    Cancelled --> [*]
-    Fulfilled --> [*]
-```

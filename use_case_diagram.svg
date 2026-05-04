@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1700" viewBox="0 0 1200 1700">
+  <defs>
+    <style>
+      .title { font: 700 38px Arial, sans-serif; fill: #102a43; }
+      .subtitle { font: 700 24px Arial, sans-serif; fill: #102a43; }
+      .system-title { font: 700 22px Arial, sans-serif; fill: #102a43; }
+      .uc { font: 700 18px Arial, sans-serif; fill: #102a43; }
+      .actor { font: 700 24px Arial, sans-serif; fill: #1f2937; }
+      .rel { font: 700 16px Arial, sans-serif; fill: #334e68; }
+      .line { stroke: #4a5568; stroke-width: 2.3; }
+      .rel-line { stroke: #334e68; stroke-width: 2; stroke-dasharray: 7 6; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334e68"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="1700" fill="#f4f6f8"/>
+  <text x="30" y="55" class="title">3.1 Use Case Diagram - Quantity: 1 (all users included)</text>
+  <text x="270" y="95" class="subtitle">Use Case Diagram of Blood Donation System</text>
+
+  <rect x="90" y="130" width="860" height="1530" fill="#7ec9ef" stroke="#1d4e89" stroke-width="3"/>
+  <text x="390" y="165" class="system-title">Blood Donation System</text>
+
+  <ellipse cx="450" cy="230" rx="220" ry="34" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="365" y="237" class="uc">Register / Login</text>
+
+  <ellipse cx="450" cy="320" rx="220" ry="34" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="334" y="327" class="uc">Manage Donor Profile</text>
+
+  <ellipse cx="450" cy="410" rx="220" ry="34" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="355" y="417" class="uc">Book Appointment</text>
+
+  <ellipse cx="450" cy="500" rx="220" ry="34" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="300" y="507" class="uc">View / Cancel Appointments</text>
+
+  <ellipse cx="450" cy="620" rx="240" ry="36" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="276" y="627" class="uc">Create / Track Blood Requests</text>
+
+  <ellipse cx="450" cy="710" rx="260" ry="36" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="216" y="717" class="uc">Approve / Reject / Fulfill Request</text>
+
+  <ellipse cx="450" cy="850" rx="230" ry="34" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="357" y="857" class="uc">Validate Credentials</text>
+
+  <ellipse cx="450" cy="940" rx="230" ry="34" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="372" y="947" class="uc">Check Eligibility</text>
+
+  <ellipse cx="450" cy="1030" rx="230" ry="34" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="329" y="1037" class="uc">Check Slot Availability</text>
+
+  <ellipse cx="450" cy="1120" rx="230" ry="34" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="393" y="1127" class="uc">Notify User</text>
+
+  <ellipse cx="450" cy="1215" rx="270" ry="36" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="258" y="1222" class="uc">Review / Approve / Complete Appointment</text>
+
+  <ellipse cx="450" cy="1310" rx="230" ry="34" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="366" y="1317" class="uc">Manage Inventory</text>
+
+  <ellipse cx="450" cy="1405" rx="260" ry="36" fill="#a8dcf5" stroke="#1d4e89" stroke-width="2.2"/>
+  <text x="270" y="1412" class="uc">Update Inventory / Request Status</text>
+
+  <circle cx="1050" cy="300" r="14" fill="#74c4ec" stroke="#4b5563" stroke-width="2.2"/>
+  <line x1="1050" y1="314" x2="1050" y2="362" class="line"/>
+  <line x1="1027" y1="334" x2="1073" y2="334" class="line"/>
+  <line x1="1050" y1="362" x2="1031" y2="390" class="line"/>
+  <line x1="1050" y1="362" x2="1069" y2="390" class="line"/>
+  <text x="1005" y="420" class="actor">Donor</text>
+
+  <circle cx="1050" cy="760" r="14" fill="#74c4ec" stroke="#4b5563" stroke-width="2.2"/>
+  <line x1="1050" y1="774" x2="1050" y2="822" class="line"/>
+  <line x1="1027" y1="794" x2="1073" y2="794" class="line"/>
+  <line x1="1050" y1="822" x2="1031" y2="850" class="line"/>
+  <line x1="1050" y1="822" x2="1069" y2="850" class="line"/>
+  <text x="945" y="880" class="actor">Bank Staff</text>
+
+  <circle cx="1050" cy="1220" r="14" fill="#74c4ec" stroke="#4b5563" stroke-width="2.2"/>
+  <line x1="1050" y1="1234" x2="1050" y2="1282" class="line"/>
+  <line x1="1027" y1="1254" x2="1073" y2="1254" class="line"/>
+  <line x1="1050" y1="1282" x2="1031" y2="1310" class="line"/>
+  <line x1="1050" y1="1282" x2="1069" y2="1310" class="line"/>
+  <text x="920" y="1340" class="actor">Hospital Staff</text>
+
+  <line x1="1030" y1="315" x2="670" y2="230" class="line"/>
+  <line x1="1030" y1="335" x2="670" y2="320" class="line"/>
+  <line x1="1030" y1="355" x2="670" y2="410" class="line"/>
+  <line x1="1030" y1="375" x2="670" y2="500" class="line"/>
+
+  <line x1="1030" y1="775" x2="720" y2="1215" class="line"/>
+  <line x1="1030" y1="795" x2="680" y2="1310" class="line"/>
+  <line x1="1030" y1="815" x2="710" y2="1405" class="line"/>
+
+  <line x1="1030" y1="1235" x2="690" y2="620" class="line"/>
+  <line x1="1030" y1="1255" x2="710" y2="710" class="line"/>
+  <line x1="1030" y1="1275" x2="670" y2="230" class="line"/>
+
+  <line x1="620" y1="230" x2="680" y2="850" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="635" y="545" class="rel">&lt;&lt;include&gt;&gt;</text>
+
+  <line x1="620" y1="410" x2="680" y2="940" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="635" y="675" class="rel">&lt;&lt;include&gt;&gt;</text>
+
+  <line x1="620" y1="410" x2="680" y2="1030" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="635" y="760" class="rel">&lt;&lt;include&gt;&gt;</text>
+
+  <line x1="620" y1="1215" x2="680" y2="1120" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="635" y="1174" class="rel">&lt;&lt;include&gt;&gt;</text>
+
+  <line x1="620" y1="710" x2="680" y2="1405" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="635" y="1060" class="rel">&lt;&lt;include&gt;&gt;</text>
+
+  <line x1="620" y1="1310" x2="680" y2="1405" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="635" y="1368" class="rel">&lt;&lt;include&gt;&gt;</text>
+
+  <line x1="620" y1="500" x2="680" y2="410" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="635" y="470" class="rel">&lt;&lt;extend&gt;&gt;</text>
+
+  <line x1="620" y1="1215" x2="680" y2="620" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="635" y="915" class="rel">&lt;&lt;extend&gt;&gt;</text>
+
+  <line x1="620" y1="1215" x2="680" y2="710" class="rel-line" marker-end="url(#arrow)"/>
+  <text x="635" y="970" class="rel">&lt;&lt;extend&gt;&gt;</text>
+</svg>
